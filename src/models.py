@@ -18,7 +18,7 @@ class People(db.Model):
 
 class Planet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    planet_name = db.Column(db.String(120),  nullable=False)
+    planet_name = db.Column(db.String(120), nullable=False)
 
     def serialize(self):
         return {
