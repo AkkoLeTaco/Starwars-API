@@ -8,6 +8,8 @@ class People(db.Model):
     password = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=True)
 
+    def __repr__(self):
+        return '<People %r>' % self.id
 
     def serialize(self):
         return {
@@ -18,12 +20,17 @@ class People(db.Model):
 
 class Planet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    planet_name = db.Column(db.String(120), nullable=False)
+    planet_name = db.Column(db.String(120),  unique=False, nullable=False)
+    climate = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return '<Planet %r>' % self.id 
 
     def serialize(self):
         return {
             "id": self.id,
             "planet_name": self.planet_name,
+            "climate": self.climate
             # do not serialize the password, its a security breach
         }
 
@@ -38,6 +45,8 @@ class Characters(db.Model):
     height = db.Column(db.Integer,  nullable=False)
     homeworld = db.Column(db.String(120),  nullable=False)
 
+    def __repr__(self):
+        return '<Characters %r>' % self.id
 
     def serialize(self):
         return {
@@ -58,6 +67,8 @@ class Favorites(db.Model):
     planets = db.Column(db.String(120),  nullable=False)
     characters = db.Column(db.String(120),  nullable=False)
 
+    def __repr__(self):
+        return '<Favorites %r>' % self.id
 
     def serialize(self):
         return {
