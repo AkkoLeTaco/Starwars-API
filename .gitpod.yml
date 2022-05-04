@@ -11,8 +11,8 @@ tasks:
     - init: |
         cp .env.example .env && 
         mysql -u root -e "CREATE DATABASE example" && 
-        pipenv install &&
-        pipenv run upgrade;
+        pipenv run upgrade &&
+        pipenv install;
       command: >
         pipenv run start;
     - command: python3 welcome.py

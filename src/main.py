@@ -52,6 +52,15 @@ def handle_person(id):
     people = People.query.get(people_id)
     return (people.serialize())
 
+@app.route('/people/<int:people_id>', methods=['DELETE'])
+def delete_person(id):
+    request_body = request.get_json()
+    people = People.query.get(people_id)
+    db.session.delete(people_id)
+    db.session.commit()
+    return f"user was deleted successfully", 200
+
+
 @app.route('/planets', methods=['GET'])
 def handle_planets():
     planet = Planet.query.all()
@@ -71,18 +80,38 @@ def create_planets():
     db.session.commit()
     return f"The planet {request_planets['planet_name']} was created sucessfully", 200
 
+@app.route('/planets/<int:planets_id>', methods=['DELETE'])
+def delete_planet(id):
+    pass
 
 @app.route('/characters', methods=['GET'])
 def handle_characters():
     characters =  Characters.query.all()
-    character_list = list(map(lambda z: z. serialize(), characters))
+    character_list = list(map(lambda z: z.serialize(), characters))
 
     return jsonify(character_list), 200
+
+@app.route('/characters/<int:characters_id>', methods=['GET'])
+def handle_character(id):
+    character = Planet.query.get(characters_id)
+    return (characters.serialize())
+
+@app.route('/characters', methods=['POST'])
+def create_characters():
+    request_characters = request.get_json()
+    new_characters = Characters(character_name=request_characters['character_name'], mass=request_characters['mass'], hair_color=request_characters['hair_color'], skin_color=request_characters['skin_color'], eye_color=request_characters['eye_color'], gender=request_characters['gender'], height=request_characters['height'], homeworld=request_characters['homeworld'])
+    db.session.add(new_characters)
+    db.session.commit()
+    return f"The character {request_characters['character_name']} was created sucessfully", 200
+
+@app.route('/characters/<int:characters_id>', methods=['DELETE'])
+def delete_character(id):
+    pass
 
 @app.route('/favorites', methods=['GET'])
 def handle_favorites():
     favorites = Favorites.query.all()
-    favorite_list = list(map(lambda z: z. serialize(), favorites))
+    favorite_list = list(map(lambda z: z.serialize(), favorites))
 
     return jsonify(favorite_list), 200
 
