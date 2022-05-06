@@ -54,11 +54,11 @@ def handle_person(id):
 
 @app.route('/people/<int:people_id>', methods=['DELETE'])
 def delete_person(id):
-    request_body = request.get_json()
-    people = People.query.get(people_id)
-    db.session.delete(people_id)
+    person1 = Person.query.get(person_id)
+    if person1 is None:
+        raise APIException('User not found', status_code=404)
+    db.session.delete(person1)
     db.session.commit()
-    return f"user was deleted successfully", 200
 
 
 @app.route('/planets', methods=['GET'])
@@ -82,7 +82,11 @@ def create_planets():
 
 @app.route('/planets/<int:planets_id>', methods=['DELETE'])
 def delete_planet(id):
-    pass
+    planet1 = Planet.query.get(planets_id)
+    if planet1 is None:
+        raise APIException('planet not found', status_code=404)
+    db.session.delete(planet1)
+    db.session.commit()
 
 @app.route('/characters', methods=['GET'])
 def handle_characters():
@@ -106,7 +110,11 @@ def create_characters():
 
 @app.route('/characters/<int:characters_id>', methods=['DELETE'])
 def delete_character(id):
-    pass
+    character1 = Characters.query.get(characters_id)
+    if character1 is None:
+        raise APIException('character not found', status_code=404)
+    db.session.delete(character1)
+    db.session.commit()
 
 @app.route('/favorites', methods=['GET'])
 def handle_favorites():
