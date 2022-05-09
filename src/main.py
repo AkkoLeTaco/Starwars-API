@@ -48,12 +48,12 @@ def create_people():
     return f"The new user {request_body['email']} was created sucessfully", 200
 
 @app.route('/people/<int:people_id>', methods=['GET'])
-def handle_person(id):
+def handle_person(people_id):
     people = People.query.get(people_id)
     return (people.serialize())
 
 @app.route('/people/<int:people_id>', methods=['DELETE'])
-def delete_person(id):
+def delete_person(people_id):
     person1 = Person.query.get(person_id)
     if person1 is None:
         raise APIException('User not found', status_code=404)
@@ -69,7 +69,7 @@ def handle_planets():
     return jsonify(planet_list), 200
 
 @app.route('/planets/<int:planets_id>', methods=['GET'])
-def handle_planet(id):
+def handle_planet(planets_id):
     planets = Planet.query.get(planets_id)
     return (planets.serialize())
 
@@ -82,7 +82,7 @@ def create_planets():
     return f"The planet {request_planets['planet_name']} was created sucessfully", 200
 
 @app.route('/planets/<int:planets_id>', methods=['DELETE'])
-def delete_planet(id):
+def delete_planet(planets_id):
     planet1 = Planet.query.get(planets_id)
     if planet1 is None:
         raise APIException('planet not found', status_code=404)
@@ -98,7 +98,7 @@ def handle_characters():
     return jsonify(character_list), 200
 
 @app.route('/characters/<int:characters_id>', methods=['GET'])
-def handle_character(id):
+def handle_character(characters_id):
     character = Planet.query.get(characters_id)
     return (characters.serialize())
 
@@ -111,7 +111,7 @@ def create_characters():
     return f"The character {request_characters['character_name']} was created sucessfully", 200
 
 @app.route('/characters/<int:characters_id>', methods=['DELETE'])
-def delete_character(id):
+def delete_character(characters_id):
     character1 = Characters.query.get(characters_id)
     if character1 is None:
         raise APIException('character not found', status_code=404)
