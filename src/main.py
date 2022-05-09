@@ -88,7 +88,7 @@ def delete_planet(planets_id):
         raise APIException('planet not found', status_code=404)
     db.session.delete(planet1)
     db.session.commit()
-    return f"The planet {request_planets['planet_name']} was removed sucessfully", 200
+    return f"The planet was removed sucessfully", 200
 
 @app.route('/characters', methods=['GET'])
 def handle_characters():
@@ -108,7 +108,7 @@ def create_characters():
     new_characters = Characters(character_name=request_characters['character_name'], mass=request_characters['mass'], hair_color=request_characters['hair_color'], skin_color=request_characters['skin_color'], eye_color=request_characters['eye_color'], gender=request_characters['gender'], height=request_characters['height'], homeworld=request_characters['homeworld'])
     db.session.add(new_characters)
     db.session.commit()
-    return f"The character {request_characters['character_name']} was created sucessfully", 200
+    return f"The character was created sucessfully", 200
 
 @app.route('/characters/<int:characters_id>', methods=['DELETE'])
 def delete_character(characters_id):
@@ -117,7 +117,7 @@ def delete_character(characters_id):
         raise APIException('character not found', status_code=404)
     db.session.delete(character1)
     db.session.commit()
-    return f"The character {request_characters['character_name']} was removed sucessfully", 200
+    return f"The character was removed sucessfully", 200
 
 @app.route('/favorites', methods=['GET'])
 def handle_favorites():
