@@ -54,12 +54,12 @@ def handle_person(people_id):
 
 @app.route('/people/<int:people_id>', methods=['DELETE'])
 def delete_person(people_id):
-    person1 = Person.query.get(person_id)
+    person1 = People.query.get(people_id)
     if person1 is None:
         raise APIException('User not found', status_code=404)
     db.session.delete(person1)
     db.session.commit()
-    return f"The user {request_body['email']} was removed sucessfully", 200
+    return f"The user was removed sucessfully", 200
 
 
 @app.route('/planets', methods=['GET'])
