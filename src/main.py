@@ -119,14 +119,6 @@ def delete_character(characters_id):
     db.session.commit()
     return f"The character was removed sucessfully", 200
 
-@app.route('/favorites', methods=['GET'])
-def handle_favorites():
-    favorites = Favorites.query.all()
-    favorite_list = list(map(lambda z: z.serialize(), favorites))
-
-    return jsonify(favorite_list), 200
-
-
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3000))
