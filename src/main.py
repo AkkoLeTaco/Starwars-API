@@ -59,6 +59,7 @@ def delete_person(id):
         raise APIException('User not found', status_code=404)
     db.session.delete(person1)
     db.session.commit()
+    return f"The user {request_body['email']} was removed sucessfully", 200
 
 
 @app.route('/planets', methods=['GET'])
@@ -87,6 +88,7 @@ def delete_planet(id):
         raise APIException('planet not found', status_code=404)
     db.session.delete(planet1)
     db.session.commit()
+    return f"The planet {request_planets['planet_name']} was removed sucessfully", 200
 
 @app.route('/characters', methods=['GET'])
 def handle_characters():
@@ -115,6 +117,7 @@ def delete_character(id):
         raise APIException('character not found', status_code=404)
     db.session.delete(character1)
     db.session.commit()
+    return f"The character {request_characters['character_name']} was removed sucessfully", 200
 
 @app.route('/favorites', methods=['GET'])
 def handle_favorites():
